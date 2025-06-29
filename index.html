@@ -2,128 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shree Swamikrupa Agency & Transport</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <link rel="icon" href="https://img.icons8.com/fluency/48/delivery.png">
   <style>
-    html, body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      height: 100%;
-      background: linear-gradient(135deg, #e3f2fd, #ffffff);
-      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .container {
+
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #80deea);
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .app-container {
+      width: 90%;
+      max-width: 400px;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
+
     h1 {
-      font-size: 22px;
-      color: #0d47a1;
-      margin-bottom: 10px;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: #00796b;
     }
-    .date-time {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 30px;
+
+    .tile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
     }
-    .button {
-      display: block;
-      width: 90%;
-      max-width: 350px;
-      margin: 10px auto;
-      padding: 14px 18px;
-      font-size: 17px;
-      font-weight: 500;
-      background-color: #1976d2;
+
+    .tile {
+      background-color: #4dd0e1;
       color: white;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      border-radius: 15px;
+      font-weight: bold;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
+      transition: transform 0.2s ease-in-out;
     }
-    .button:hover {
-      background-color: #0d47a1;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+    .tile:hover {
+      transform: scale(1.05);
     }
-    .footer {
-      font-size: 12px;
-      color: #888;
-      margin-top: 40px;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+
+    .page {
       display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    #backButton {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      background-color: #0d47a1;
+
+    .page.active {
+      display: flex;
+    }
+
+    .back-button {
+      margin-top: 2rem;
+      background-color: #00796b;
       color: white;
+      padding: 0.5rem 1rem;
       border: none;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 14px;
-      display: none;
-      z-index: 1000;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .back-button:hover {
+      background-color: #004d40;
     }
   </style>
 </head>
 <body>
-  <div id="home" class="container">
-    <h1>Shree Swamikrupa Agency & Transport</h1>
-    <div class="date-time" id="datetime"></div>
+  <div class="app-container">
+    <div id="home" class="page active">
+      <h1>Shree Swamikrupa Agency & Transport</h1>
+      <div class="tile-grid">
+        <div class="tile" onclick="navigate('create')">Create Invoice</div>
+        <div class="tile" onclick="navigate('send')">Send Email</div>
+        <div class="tile" onclick="navigate('check')">Check Last Invoice</div>
+        <div class="tile" onclick="navigate('add')">Add New Party</div>
+      </div>
+    </div>
 
-    <button class="button" onclick="openForm('https://docs.google.com/forms/d/e/1FAIpQLSeSFeGzHHY3HO3dLbB297dv-ZyVdjI68vQLuOn2CbIAngVAAA/viewform')">🧾 Create Invoice</button>
-    <button class="button" onclick="openForm('https://docs.google.com/forms/d/e/1FAIpQLSf6rtaBQjS6CxvqtfG7W9c-YNhkbpSseYioJbpweMPabt3p7Q/viewform')">📧 Send Email</button>
-    <button class="button" onclick="openForm('https://docs.google.com/forms/d/1LXAOYFFFc2Jgqqj4XNNvP_1djI3kMcSlQaAsRgGzQ5Q/viewform')">🔍 Check Last Invoice</button>
-    <button class="button" onclick="openForm('https://docs.google.com/forms/d/e/1FAIpQLSeWRt1qD_Hl39E9BVEgvN8wyXmC2wv5UK1mBlxScnY9tnPnPw/viewform')">👤 Add New Party</button>
+    <div id="create" class="page">
+      <h1>Create Invoice</h1>
+      <button class="back-button" onclick="goHome()">Back</button>
+    </div>
 
-    <div class="footer">
-      &copy; <span id="year"></span> Shree Swamikrupa | App by Sanket
+    <div id="send" class="page">
+      <h1>Send Email</h1>
+      <button class="back-button" onclick="goHome()">Back</button>
+    </div>
+
+    <div id="check" class="page">
+      <h1>Check Last Invoice</h1>
+      <button class="back-button" onclick="goHome()">Back</button>
+    </div>
+
+    <div id="add" class="page">
+      <h1>Add New Party</h1>
+      <button class="back-button" onclick="goHome()">Back</button>
     </div>
   </div>
 
-  <button id="backButton" onclick="goHome()">⬅ Back</button>
-  <iframe id="iframeViewer"></iframe>
-
   <script>
-    function updateDateTime() {
-      const now = new Date();
-      const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
-      const timeString = now.toLocaleTimeString();
-      const dateString = now.toLocaleDateString(undefined, options);
-      document.getElementById('datetime').textContent = `${dateString} | ${timeString}`;
-    }
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-
-    function openForm(url) {
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('iframeViewer').src = url;
-      document.getElementById('iframeViewer').style.display = 'block';
-      document.getElementById('backButton').style.display = 'inline-block';
+    function navigate(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
     }
 
     function goHome() {
-      document.getElementById('iframeViewer').style.display = 'none';
-      document.getElementById('iframeViewer').src = '';
-      document.getElementById('home').style.display = 'flex';
-      document.getElementById('backButton').style.display = 'none';
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('home').classList.add('active');
     }
   </script>
 </body>
