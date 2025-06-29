@@ -129,17 +129,9 @@
       document.getElementById('backButton').style.display = 'none';
     }
 
-    // New function to try to open the calculator
+    // Updated function to open a web-based calculator
     function openCalculator() {
-      // Check for mobile device and try to open native calculator if possible
-      const userAgent = navigator.userAgent.toLowerCase();
-      if (/android/i.test(userAgent)) {
-        // On Android, try to open the Calculator app
-        window.location.href = 'calculator://';
-      } else {
-        // Otherwise, open a web-based calculator
-        window.open('https://www.calculator.net', '_blank');
-      }
+      window.open('https://www.calculator.net', '_blank');
     }
   </script>
 </body>
