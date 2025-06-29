@@ -90,6 +90,9 @@
     <button class="button" onclick="openForm('https://docs.google.com/forms/d/e/1FAIpQLSf6rtaBQjS6CxvqtfG7W9c-YNhkbpSseYioJbpweMPabt3p7Q/viewform')">📧 Send Email</button>
     <button class="button" onclick="openForm('https://docs.google.com/forms/d/1LXAOYFFFc2Jgqqj4XNNvP_1djI3kMcSlQaAsRgGzQ5Q/viewform')">🔍 Check Last Invoice</button>
     <button class="button" onclick="openForm('https://docs.google.com/forms/d/e/1FAIpQLSeWRt1qD_Hl39E9BVEgvN8wyXmC2wv5UK1mBlxScnY9tnPnPw/viewform')">👨‍💼 Add New Party</button>
+    
+    <!-- New Button for Calculator -->
+    <button class="button" onclick="openCalculator()">🧮 Open Calculator</button>
 
     <div class="footer">
       &copy; <span id="year"></span> Shree Swamikrupa | App by Sanket
@@ -124,6 +127,19 @@
       document.getElementById('iframeViewer').src = '';
       document.getElementById('home').style.display = 'flex';
       document.getElementById('backButton').style.display = 'none';
+    }
+
+    // New function to try to open the calculator
+    function openCalculator() {
+      // Check for mobile device and try to open native calculator if possible
+      const userAgent = navigator.userAgent.toLowerCase();
+      if (/android/i.test(userAgent)) {
+        // On Android, try to open the Calculator app
+        window.location.href = 'calculator://';
+      } else {
+        // Otherwise, open a web-based calculator
+        window.open('https://www.calculator.net', '_blank');
+      }
     }
   </script>
 </body>
