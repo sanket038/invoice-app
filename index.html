@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shree Swamikrupa Agency & Transport</title>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/delivery.png">
   <style>
     * {
       box-sizing: border-box;
@@ -13,28 +14,34 @@
     }
 
     body {
-      background: linear-gradient(135deg, #e0f7fa, #80deea);
+      background: linear-gradient(135deg, #e3f2fd, #ffffff);
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all 0.3s ease-in-out;
     }
 
     .app-container {
       width: 90%;
-      max-width: 400px;
+      max-width: 420px;
       background-color: white;
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       text-align: center;
+      position: relative;
     }
 
     h1 {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      color: #00796b;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #0d47a1;
+    }
+
+    .date-time {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 1.5rem;
     }
 
     .tile-grid {
@@ -44,17 +51,19 @@
     }
 
     .tile {
-      background-color: #4dd0e1;
+      background-color: #1976d2;
       color: white;
-      padding: 1rem;
+      padding: 1.2rem;
       border-radius: 15px;
       font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s ease-in-out;
+      transition: transform 0.3s, background-color 0.3s;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
     }
 
     .tile:hover {
-      transform: scale(1.05);
+      transform: translateY(-3px);
+      background-color: #0d47a1;
     }
 
     .page {
@@ -70,9 +79,9 @@
 
     .back-button {
       margin-top: 2rem;
-      background-color: #00796b;
+      background-color: #0d47a1;
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.2rem;
       border: none;
       border-radius: 10px;
       cursor: pointer;
@@ -80,44 +89,72 @@
     }
 
     .back-button:hover {
-      background-color: #004d40;
+      background-color: #002f6c;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <div class="app-container">
+    <div class="date-time" id="datetime"></div>
+
     <div id="home" class="page active">
       <h1>Shree Swamikrupa Agency & Transport</h1>
       <div class="tile-grid">
-        <div class="tile" onclick="navigate('create')">Create Invoice</div>
-        <div class="tile" onclick="navigate('send')">Send Email</div>
-        <div class="tile" onclick="navigate('check')">Check Last Invoice</div>
-        <div class="tile" onclick="navigate('add')">Add New Party</div>
+        <div class="tile" onclick="navigate('create')">🧾 Create Invoice</div>
+        <div class="tile" onclick="navigate('send')">📧 Send Email</div>
+        <div class="tile" onclick="navigate('check')">🔍 Check Last Invoice</div>
+        <div class="tile" onclick="navigate('add')">👤 Add New Party</div>
+        <div class="tile" onclick="navigate('calc')">🧮 Calculator</div>
       </div>
+      <div class="footer">&copy; <span id="year"></span> Shree Swamikrupa | App by Sanket</div>
     </div>
 
     <div id="create" class="page">
       <h1>Create Invoice</h1>
-      <button class="back-button" onclick="goHome()">Back</button>
+      <button class="back-button" onclick="goHome()">⬅ Back</button>
     </div>
 
     <div id="send" class="page">
       <h1>Send Email</h1>
-      <button class="back-button" onclick="goHome()">Back</button>
+      <button class="back-button" onclick="goHome()">⬅ Back</button>
     </div>
 
     <div id="check" class="page">
       <h1>Check Last Invoice</h1>
-      <button class="back-button" onclick="goHome()">Back</button>
+      <button class="back-button" onclick="goHome()">⬅ Back</button>
     </div>
 
     <div id="add" class="page">
       <h1>Add New Party</h1>
-      <button class="back-button" onclick="goHome()">Back</button>
+      <button class="back-button" onclick="goHome()">⬅ Back</button>
+    </div>
+
+    <div id="calc" class="page">
+      <h1>Calculator</h1>
+      <iframe src="https://www.online-calculator.com/simple-calculator/" width="100%" height="400px" style="border:none;"></iframe>
+      <button class="back-button" onclick="goHome()">⬅ Back</button>
     </div>
   </div>
 
   <script>
+    function updateDateTime() {
+      const now = new Date();
+      const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+      const timeString = now.toLocaleTimeString();
+      const dateString = now.toLocaleDateString(undefined, options);
+      document.getElementById('datetime').textContent = `${dateString} | ${timeString}`;
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
     function navigate(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
